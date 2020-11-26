@@ -1,28 +1,32 @@
 import { Component, OnInit } from '@angular/core';  
 import { User } from '../../shared/models/user.model';
+import { UsersService } from '../../shared/services/users.services';
 
 @Component({
   selector: 'app-assignment-principal',
-  templateUrl: './assignment-principal.component.html'
+  templateUrl: './assignment-principal.component.html',
+  providers: [
+    UsersService
+  ]
 })
-export class AssignmentPrincipalComponent implements OnInit{
+export class AssignmentPrincipalComponent implements OnInit {
 
-  private activeUsers: Array<User> = new Array<User>();
-  private inactiveUsers: Array<User> = new Array<User>();
+  private activeUsers: Array<User> = null;
+  private inactiveUsers: Array<User> = null;
 
-  ngOnInit() {
-    this.activeUsers.push(new User('teste1', true));
-    this.activeUsers.push(new User('teste2', true));
-    this.activeUsers.push(new User('teste3', true));
-    
-    this.inactiveUsers.push(new User('teste4', false));
-    this.inactiveUsers.push(new User('teste5', false));
-    this.inactiveUsers.push(new User('teste6', false));
+  public constructor(
+    private usersService:UsersService
+  ) {}
+  
+  public ngOnInit(): void {
+    this.activeUsers = this.usersService.getActiveUsers();
+    this.inactiveUsers = this.usersService.getInactiveUsers();
   }
 
   public onDeactivateUser(index:number): void {
-    let user:User = this.activeUsers.splice(index, 1)[0];
-    this.inactiveUsers.push(user);
+    // let user:User = this.activeUsers.splice(index, 1)[0];
+    // this.inactiveUsers.push(user);
+    this.usersService.getDeactivateUser().subscribe();
   }
 
   public onActivateUser(index:number): void {
