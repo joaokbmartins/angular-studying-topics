@@ -2,7 +2,7 @@ import { Directive, ElementRef, OnInit } from '@angular/core';
 
 @Directive({
 
-  selector: '[basicHighLight]'
+  selector: '[appBasicHighLight]'
 
 })
 

@@ -4,4 +4,22 @@
 
 <hr>
 
-<p class="panel">Basic Directive!!</p>
+<p class="panel" appBasicHighLight>Basic Directive!</p>
+<p 
+  class="panel" 
+  [appBetterHighLightDirective]="'red'"
+  bgInit="green">Better Directive With Renderer2!!</p>
+
+<div class="alert alert-success" *appUnless="title == 'Other Title'">
+  <span>Test Unless Custom Structural Directive!!!</span>
+</div>
+
+<div [ngSwitch]='value'>
+
+  <p *ngSwitchCase="10">value 10</p>
+  <p *ngSwitchCase="20">value 20</p>
+  <p *ngSwitchCase="15">value 15</p>
+  <p *ngSwitchCase="25">value 25</p>
+  <p *ngSwitchDefault>value 50</p>
+  
+</div>
