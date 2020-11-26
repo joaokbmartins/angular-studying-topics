@@ -7,9 +7,13 @@ import { BetterHighLightDirective } from './topic-directives/shared/directives/b
 import { UnlessDirective } from './topic-directives/shared/directives/unless.directive';
 import { PrincipalDirectiveComponent } from './topic-directives/components/principal-directive/principal-directive.component';
 
-import { AccountComponent } from './topic-services/components/account/account.component';
-import { NewAccountComponent } from './topic-services/components/new-account/new-account.component';
+import { AccountComponent } from './topic-services/components/principal-service/account/account.component';
+import { NewAccountComponent } from './topic-services/components/principal-service/new-account/new-account.component';
 import { PrincipalServiceComponent } from './topic-services/components/principal-service/principal-service.component';
+import { AccountsService } from './topic-services/shared/services/accounts.service';
+import { AssignmentPrincipalComponent } from './topic-services/assignment/components/assignment-principal/assignment-principal.component';
+import { ActiveUserComponent } from './topic-services/assignment/components/assignment-principal/active-user/active-user.component';
+import { InactiveUserComponent } from './topic-services/assignment/components/assignment-principal/inactive-user/inactive-user.component';
  
 @NgModule({
   declarations: [
@@ -22,11 +26,16 @@ import { PrincipalServiceComponent } from './topic-services/components/principal
     AccountComponent,
     NewAccountComponent,
     PrincipalServiceComponent,
+
+    ActiveUserComponent,
+    InactiveUserComponent,
+    AssignmentPrincipalComponent
+    
   ],
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [AccountsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

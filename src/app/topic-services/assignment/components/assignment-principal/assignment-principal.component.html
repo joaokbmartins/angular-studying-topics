@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row col-sx-12 col-md-8 col-offset-8">
+  <h2>Active Users</h2>
+  <app-active-user
+    *ngFor="let activeUser of getActiveUsers(); let i = index"
+    [user]="activeUser"
+    (deactivateUser)="onDeactivateUser(i)"></app-active-user>
+
+  <hr>
+
+  <h2>Inactive Users</h2>
+  <app-inactive-user
+    *ngFor="let inactiveUser of getInactiveUsers(); let i = index"
+    [user]="inactiveUser"
+    (activateUser)="onActivateUser(i)"></app-inactive-user>
+  </div>
+</div>
