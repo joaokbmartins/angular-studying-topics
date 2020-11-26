@@ -1,25 +1,11 @@
-<div class="panel">
-  <div class="row">
-    <div class="col-md-12">
-      <h4><b>Master Account</b></h4>
-    </div>
-  </div>
+<div class="box" >
+  <h4><b>{{ getAccount().getName() }}</b></h4>
   <hr>
-  <div class="row">
-    <div class="col-md-12">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      
-      <p>Status: This account is unknown</p>
-      <button class="btn btn-default" (click)="setAccountStatus('active')">Set to 'active'</button>
-      &nbsp;
-      <button class="btn btn-default" (click)="setAccountStatus('inactive')">Set to 'inactive'</button>
-      &nbsp;
-      <button class="btn btn-default" (click)="setAccountStatus('unknown')">Set to 'unknown'</button>
-      
-    </div>
-  </div>  
-</div>
   
+  <p>Status: This account is '{{ getAccount().getStatus() }}'</p>
+  <button class="btn btn-default" (click)="setAccountStatus('active')">Set to 'active'</button>
+  &nbsp;
+  <button class="btn btn-default" (click)="setAccountStatus('inactive')">Set to 'inactive'</button>
+  &nbsp;
+  <button class="btn btn-default" (click)="setAccountStatus('unknown')">Set to 'unknown'</button>
+</div>

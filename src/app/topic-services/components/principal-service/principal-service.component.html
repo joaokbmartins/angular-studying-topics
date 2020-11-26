@@ -1,1 +1,16 @@
-<app-account></app-account>
+<div class="container">
+  <div class="row col-md-12">
+    <app-new-account
+    (addAccount)="addNewAccount($event)"></app-new-account>
+    <hr>
+
+    <h3 *ngIf="getAccounts().length > 0">Account List</h3>
+    <h3 *ngIf="getAccounts().length <= 0">Account List Is Empty</h3>
+    
+    <app-account
+    *ngFor="let account of getAccounts()"
+    [account]="account"
+    (changeAccountStatus)="updateStatus($event, account)"></app-account>
+
+  </div>
+</div>

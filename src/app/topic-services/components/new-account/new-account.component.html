@@ -1,0 +1,18 @@
+<h3>New Account:</h3>
+
+<label for="name">Account Name</label>
+<input #accountNameInput class="form-control" name="name" id="name"/>
+
+<br/>
+
+<label for="status">Account Status</label>
+<select #accountStatusInput class="form-control" name="status" id="status">
+  <option>Choose one...</option>
+  <option value="active">Active</option>
+  <option value="inactive">Inactive</option>
+  <option value="unknown">Unknown</option>
+</select>
+
+<br/>
+
+<button class="btn btn-primary" (click)="onAddAccount()">Add Account</button>
