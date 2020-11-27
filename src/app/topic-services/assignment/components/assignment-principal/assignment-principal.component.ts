@@ -6,40 +6,37 @@ import { UsersService } from '../../shared/services/users.services';
   selector: 'app-assignment-principal',
   templateUrl: './assignment-principal.component.html',
   providers: [
-    UsersService
+    // UsersService
   ]
 })
 export class AssignmentPrincipalComponent implements OnInit {
 
-  private activeUsers: Array<User> = null;
-  private inactiveUsers: Array<User> = null;
+  user: User = null; 
+  activeUsers: Array<User> = null;
+  inactiveUsers: Array<User> = null;
 
   public constructor(
     private usersService:UsersService
-  ) {}
+  ) { }
   
-  public ngOnInit(): void {
-    this.activeUsers = this.usersService.getActiveUsers();
-    this.inactiveUsers = this.usersService.getInactiveUsers();
+  getCouterValue(): number {
+    return this.usersService.getSwitchCounterValue();
+  }
+  
+  public ngOnInit(): void { 
+    this.activeUsers = this.usersService.activeUsers;
+    this.inactiveUsers = this.usersService.inactiveUsers;
   }
 
   public onDeactivateUser(index:number): void {
     // let user:User = this.activeUsers.splice(index, 1)[0];
     // this.inactiveUsers.push(user);
-    this.usersService.getDeactivateUser().subscribe();
+    this.usersService.onActivateUser(this.user);
   }
 
   public onActivateUser(index:number): void {
     let user:User = this.inactiveUsers.splice(index, 1)[0];
     this.activeUsers.push(user);
   }
-
-  public getActiveUsers(): Array<User> {
-    return this.activeUsers;
-  }
-
-  public getInactiveUsers(): Array<User> {
-    return this.inactiveUsers;
-  }
-  
+ 
 }

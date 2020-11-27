@@ -1,7 +1,7 @@
 import {
   Component,
   // EventEmitter,
-  // Input,
+  Input,
   // Output
 } from '@angular/core'; 
 import { User } from '../../../shared/models/user.model';
@@ -13,7 +13,7 @@ import { UsersService } from '../../../shared/services/users.services';
 })
 export class ActiveUserComponent {
 
-  // @Input()
+  @Input()
   private user: User = null;
 
   // @Output()
@@ -25,7 +25,7 @@ export class ActiveUserComponent {
 
   public onDeactivate(): void { 
     // this.deactivateUser.emit();
-    this.usersService.getDeactivateUser().emit();
+    this.usersService.onDeactivateUser(this.user);
   }
 
   public getUser(): User {

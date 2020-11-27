@@ -1,20 +1,16 @@
-import { EventEmitter, Injectable, OnInit, Output } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { User } from '../models/user.model';
+import { SwitchLoggerService } from './switch-logger.service';
 
 @Injectable()
-export class UsersService implements OnInit {
+export class UsersService {
  
-  private activeUsers: Array<User> = new Array<User>();
-  private inactiveUsers: Array<User> = new Array<User>();
- 
-  private deactivateUser: EventEmitter<void> = new EventEmitter<void>();
+  activeUsers: Array<User> = new Array<User>();
+  inactiveUsers: Array<User> = new Array<User>();
 
-  public onDeactivateUser(index:number): void {
-    let user:User = this.activeUsers.splice(index, 1)[0];
-    this.inactiveUsers.push(user);
-  }
-
-  public ngOnInit():void {
+  public constructor(
+    private switchLoggerService:SwitchLoggerService
+  ) {
     this.activeUsers.push(new User('teste1', true));
     this.activeUsers.push(new User('teste2', true));
     this.activeUsers.push(new User('teste3', true));
@@ -24,21 +20,22 @@ export class UsersService implements OnInit {
     this.inactiveUsers.push(new User('teste6', false));
   }
 
-  public onActivateUser(index:number): void {
-    let user:User = this.inactiveUsers.splice(index, 1)[0];
-    this.activeUsers.push(user);
+  getSwitchCounterValue() {
+    return this.switchLoggerService.switchCounter;
   }
 
-  public getDeactivateUser(): EventEmitter<void> {
-    console.log("event triggered");
-    return this.deactivateUser;
+  public onDeactivateUser(user:User): void {
+    let index:number = this.activeUsers.indexOf(user);
+    this.activeUsers.splice(index, 1)[0];
+    this.inactiveUsers.push(user); 
+    this.switchLoggerService.addOne();
   }
-
-  public getActiveUsers(): Array<User> {
-    return this.activeUsers;
+  
+  public onActivateUser(user:User): void {
+    let index:number = this.inactiveUsers.indexOf(user);
+    this.inactiveUsers.splice(index, 1)[0];
+    this.activeUsers.push(user); 
+    this.switchLoggerService.addOne();
   }
-
-  public getInactiveUsers(): Array<User> {
-    return this.inactiveUsers;
-  }
+  
 }

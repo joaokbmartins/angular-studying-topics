@@ -14,6 +14,7 @@ import { AccountsService } from './topic-services/shared/services/accounts.servi
 import { AssignmentPrincipalComponent } from './topic-services/assignment/components/assignment-principal/assignment-principal.component';
 import { ActiveUserComponent } from './topic-services/assignment/components/assignment-principal/active-user/active-user.component';
 import { InactiveUserComponent } from './topic-services/assignment/components/assignment-principal/inactive-user/inactive-user.component';
+import { UsersService } from './topic-services/assignment/shared/services/users.services';
  
 @NgModule({
   declarations: [
@@ -35,7 +36,10 @@ import { InactiveUserComponent } from './topic-services/assignment/components/as
   imports: [
     BrowserModule
   ],
-  providers: [AccountsService],
+  providers: [
+    AccountsService,
+    UsersService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
